@@ -11,7 +11,7 @@ module LogicalLambdaMixin
     LogicalLambda.new {|*args| call(*args) || other.call(*args) }
   end
 
-  # Override the negative and bang as in -is_true !is_true
+  # Implement NOT via bang
   def !@; LogicalLambda.new {|*args| !call(*args)}; end
 
   ############# Comparables #############
