@@ -26,6 +26,25 @@ class LogicalLambdaMixinTest < Minitest::Test
     assert @lambda.respond_to?(:==)
     assert @lambda.respond_to?(:<)
   end
+  
+  def test_lambdas_validate_params
+    begin
+      x = lambda {|a,b|true}
+      x.call(1)
+      assert false, "Did not validate params"
+    rescue Exception => e
+      assert_equal ArgumentError, e.class
+    end
+  end
 
+  def test_proc_doesnt_validate_params
+    begin
+      x = Proc.new {|a,b|true}
+      x.call(1)
+      assert true
+    rescue Exception => e
+      assert false, "Proc validated params when shouldn't"
+    end
+  end
 
 end

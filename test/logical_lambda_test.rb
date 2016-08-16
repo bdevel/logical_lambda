@@ -27,6 +27,32 @@ class LogicalLambdaTest < Minitest::Test
     assert_equal true, (@t & !@f ).call
   end
 
+  ######### Params #######
+
+  def test_passes_params
+    a_params = nil
+    b_params = nil
+
+    a = LogicalLambda.new do |x, y|
+      a_params = [x, y]
+      true
+    end
+    
+    b = LogicalLambda.new do |x, y|
+      b_params = [x, y]
+      true
+    end
+
+    # Ensure doesn't run yet
+    c = a & b
+    assert_equal nil, a_params
+    assert_equal nil, b_params
+
+    c.call(1, 2)    
+    assert_equal [1,2], a_params
+    assert_equal [1,2], b_params
+  end
+  
   ######### Chains #######
 
   def test_chaining_ands
