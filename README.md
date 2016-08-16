@@ -38,8 +38,8 @@ end
 The Procs can be compared using `==`, `!=`, `>`, `>=`, `<`, and `<=`:
 
 ```ruby
-count_foos = lambda {|f| f.count(:foo) }
-count_bars = lambda {|f| f.count(:bars) }
+count_foos = LogicalLambda.new {|f| f.count(:foo) }
+count_bars = LogicalLambda.new {|f| f.count(:bars) }
 
 has_more_bars = count_bars > count_foos
 
@@ -86,6 +86,22 @@ puts "is_false is truthy" if is_false
 
 # What you really want is to evaluate the block with .call
 puts "is_false is truthy" if is_false.call # Returns false
+
+```
+
+## Extending Core
+You may wish to extend Ruby core so that you can use the `lambda` or
+`proc` helper functions instead of doing `LogicalLambda.new
+{...}`. It's worth a reminder that Procs do not validate parameters
+while a lambda will raise exception for too few or too many arguments.
+
+```ruby
+class Proc
+  include LogicalLambdaMixin
+end
+
+is_three = lambda {|f| f == 3}
+is_true   = proc {true}
 
 ```
 

@@ -1,7 +1,7 @@
 require_relative '../lib/logical_lambda'
 require "minitest/autorun"
 
-class TestLogicalLambda < Minitest::Test
+class LogicalLambdaTest < Minitest::Test
   def setup
     @count_foos = LogicalLambda.new {|f| f.count(:foo) }
     @count_bars = LogicalLambda.new {|f| f.count(:bar) }

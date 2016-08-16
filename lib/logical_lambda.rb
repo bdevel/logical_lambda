@@ -1,5 +1,5 @@
 
-class LogicalLambda < Proc
+module LogicalLambdaMixin
   
   # AND
   def &(other)
@@ -61,3 +61,8 @@ class LogicalLambda < Proc
   # end  
 
 end
+
+class LogicalLambda < Proc
+  include LogicalLambdaMixin
+end
+
