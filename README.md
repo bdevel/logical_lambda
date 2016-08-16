@@ -1,8 +1,9 @@
 # Logical Lambdas
 
-This library helps to generate chains of logical operations that
-may accept parameters. An example might be a recommendation engine:
-
+This library helps to generate a chain of logic operations that
+may accept parameters. The return value is always another
+`LogicalLambda` so it is easy to compose many scenarios.
+An example might be a recommendation engine:
 
 ```ruby
 users = [
@@ -89,9 +90,14 @@ puts "is_false is truthy" if is_false.call # Returns false
 
 ```
 
+## Installation
+Add `gem "logical_lambda"` to your Gemfile or
+run `gem install logical_lambda`.
+
+
 ## Extending Core
-You may wish to extend Ruby core so that you can use the `lambda` or
-`proc` helper functions instead of doing `LogicalLambda.new
+You may wish to extend Ruby core so that you can use the `lambda()` or
+`proc()` helper functions instead of doing `LogicalLambda.new
 {...}`. It's worth a reminder that Procs do not validate parameters
 while a lambda will raise exception for too few or too many arguments.
 
